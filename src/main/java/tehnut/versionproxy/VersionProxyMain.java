@@ -1,10 +1,7 @@
 package tehnut.versionproxy;
 
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -66,33 +63,5 @@ public class VersionProxyMain {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    // Shorthand IItemStackHelper methods
-
-    public static ItemStack getInvalid() {
-        return PROXY.getStackHelper().getInvalid();
-    }
-
-    public static boolean isValid(ItemStack stack) {
-        return PROXY.getStackHelper().isValid(stack);
-    }
-
-    public static int getStackSize(ItemStack stack) {
-        return PROXY.getStackHelper().getStackSize(stack);
-    }
-
-    public static ItemStack incrStackSize(ItemStack stack, int amount) {
-        return PROXY.getStackHelper().incrStackSize(stack, amount);
-    }
-
-    public static ItemStack decrStackSize(ItemStack stack, int amount) {
-        return PROXY.getStackHelper().decrStackSize(stack, amount);
-    }
-
-    // Shorthand IChatHelper methods
-
-    public static void sendMessage(EntityPlayer player, ITextComponent message, boolean actionBar) {
-        PROXY.getChatHelper().sendMessage(player, message, actionBar);
     }
 }

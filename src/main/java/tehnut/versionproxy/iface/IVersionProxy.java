@@ -22,4 +22,11 @@ public interface IVersionProxy {
      */
     @Nonnull
     IChatHelper getChatHelper();
+
+    /**
+     * Obtains the {@link IWorldHelper} for the current version proxy.
+     * @return the {@link IWorldHelper} for the current version proxy.
+     */
+    @Nonnull
+    IWorldHelper getWorldHelper();
 }
