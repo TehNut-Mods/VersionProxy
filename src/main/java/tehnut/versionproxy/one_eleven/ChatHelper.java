@@ -12,6 +12,6 @@ public class ChatHelper implements IChatHelper {
 
     @Override
     public void sendMessage(EntityPlayer player, ITextComponent textComponent, boolean actionBar) {
-        player.addChatComponentMessage(textComponent, actionBar);
+        player.sendStatusMessage(textComponent, actionBar);
     }
 }

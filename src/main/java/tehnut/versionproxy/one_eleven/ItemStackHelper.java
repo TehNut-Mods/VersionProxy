@@ -14,7 +14,7 @@ public class ItemStackHelper implements IItemStackHelper {
 
     @Override
     public ItemStack getInvalid() {
-        return ItemStack.field_190927_a;
+        return ItemStack.EMPTY;
     }
 
     @Override
@@ -25,26 +25,26 @@ public class ItemStackHelper implements IItemStackHelper {
     @Override
     public boolean isValid(@Nullable ItemStack stack) {
         assert stack != null;
-        return stack.func_190926_b();
+        return stack.isEmpty();
     }
 
     @Override
     public int getStackSize(@Nullable ItemStack stack) {
         assert stack != null;
-        return stack.func_190916_E();
+        return stack.getCount();
     }
 
     @Override
     public ItemStack incrStackSize(@Nullable ItemStack stack, int amount) {
         assert stack != null;
-        stack.func_190917_f(amount);
+        stack.grow(amount);
         return stack;
     }
 
     @Override
     public ItemStack decrStackSize(@Nullable ItemStack stack, int amount) {
         assert stack != null;
-        stack.func_190918_g(amount);
+        stack.shrink(amount);
         return stack;
     }
 }

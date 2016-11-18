@@ -17,6 +17,6 @@ public class WorldHelper implements IWorldHelper {
 
     @Override
     public boolean canBlockBePlaced(World world, Block block, BlockPos pos, boolean ignoreCollision, EnumFacing side, @Nullable Entity entity) {
-        return world.func_190527_a(block, pos, ignoreCollision, side, entity);
+        return world.mayPlace(block, pos, ignoreCollision, side, entity);
     }
 }

@@ -29,7 +29,7 @@ public class ItemBlockVersionProxy extends ItemBlock {
 
         if (VPShortHand.isValid(stack) && player.canPlayerEdit(pos, facing, stack) && VPShortHand.canBlockBePlaced(world, this.block, pos, false, facing, null)) {
             int i = this.getMetadata(stack.getMetadata());
-            IBlockState placedState = this.block.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, i, player);
+            IBlockState placedState = this.block.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, i, player, hand);
 
             if (placeBlockAt(stack, player, world, pos, facing, hitX, hitY, hitZ, placedState)) {
                 SoundType soundtype = worldBlock.getSoundType(worldState, world, pos, player);
