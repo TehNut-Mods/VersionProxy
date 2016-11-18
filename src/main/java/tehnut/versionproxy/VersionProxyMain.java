@@ -16,7 +16,7 @@ import java.lang.reflect.Modifier;
 import java.util.Map;
 import java.util.Set;
 
-@Mod(modid = "versionproxy", name = "VersionProxy", version = "@VERSION@", dependencies = "before:*")
+@Mod(modid = "versionproxy", name = "VersionProxy", version = "@VERSION@", dependencies = "before:*",acceptedMinecraftVersions = "[1.9.4,1.12]")
 public class VersionProxyMain {
 
     public static final Boolean IS_DEV = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");

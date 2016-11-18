@@ -31,7 +31,7 @@ import org.ajoberstar.grgit.Grgit
 def gitHash = 'unknown'
 if (new File(projectDir, '.git').exists()) {
     def repo = Grgit.open(project.file('.'))
-//    gitHash = repo.log().find().abbreviatedId
+    gitHash = repo.log().find().abbreviatedId
 }
 
 repositories {
@@ -46,7 +46,7 @@ minecraft {
     version = "${mc_version}-${forge_version}"
     runDir = "run"
 
-    replaceIn "Harvest.java"
+    replaceIn "VersionProxyMain.java"
     replace "@VERSION@", project.version
 
     if (project.hasProperty('mappings_version'))
@@ -81,14 +81,6 @@ jar {
     )
 }
 
-// add a javadoc jar
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    from javadoc.destinationDir
-    classifier = 'javadoc'
-}
-
-tasks.build.dependsOn sourceJar, javadocJar
-
 tasks.withType(JavaCompile) { task ->
     task.options.encoding = 'UTF-8'
 }
@@ -99,7 +91,6 @@ publishing {
         mavenJava(MavenPublication) {
             artifact jar
             artifact sourceJar
-            artifact javadocJar
         }
     }
     repositories {
@@ -122,8 +113,8 @@ curseforge {
         addGameVersion '1.9'
         addGameVersion '1.10'
         addGameVersion '1.10.2'
+        addGameVersion '1.11'
 
         addArtifact sourceJar
-        addArtifact javadocJar
     }
 }

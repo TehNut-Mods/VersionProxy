@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "versionproxy",
+    "name": "Version Proxy",
+    "description": "A proxy system for cross-version compatibility.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [ "TehNut" ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
