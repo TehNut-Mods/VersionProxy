@@ -1,19 +1,30 @@
 package tehnut.versionproxy.one_ten;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import tehnut.versionproxy.VersionProxyMain;
 import tehnut.versionproxy.iface.IWorldHelper;
 
 import javax.annotation.Nullable;
+import java.lang.reflect.Method;
 
 public class WorldHelper implements IWorldHelper {
+
+    private static final Method _MAY_PLACE;
+
+    static {
+        try {
+            String methodName = VersionProxyMain.IS_DEV ? "canBlockBePlaced" : "func_175716_a";
+            _MAY_PLACE = World.class.getMethod(methodName, Block.class, BlockPos.class, boolean.class, EnumFacing.class, Entity.class, ItemStack.class);
+            _MAY_PLACE.setAccessible(true);
+        } catch (Exception e) {
+            throw new RuntimeException("Could not reflect the \"canBlockBePlaced\" method in World.");
+        }
+    }
 
     WorldHelper() {
 
@@ -21,8 +32,10 @@ public class WorldHelper implements IWorldHelper {
 
     @Override
     public boolean canBlockBePlaced(World world, Block block, BlockPos pos, boolean ignoreCollision, EnumFacing side, @Nullable Entity entity) {
-        IBlockState state = world.getBlockState(pos);
-        AxisAlignedBB axisalignedbb = ignoreCollision ? null : block.getDefaultState().getCollisionBoundingBox(world, pos);
-        return !(axisalignedbb != Block.NULL_AABB && !world.checkNoEntityCollision(axisalignedbb.offset(pos), entity)) && (state.getMaterial() == Material.CIRCUITS && state.getBlock() == Blocks.ANVIL || state.getBlock().isReplaceable(world, pos) && state.getBlock().canPlaceBlockOnSide(world, pos, side));
+        try {
+            return (Boolean) _MAY_PLACE.invoke(world, block, pos, ignoreCollision, side, entity, null);
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

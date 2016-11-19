@@ -13,7 +13,7 @@ public class ChatHelper implements IChatHelper {
 
     static {
         try {
-            String methodName = VersionProxyMain.IS_DEV ? "func_146105_b" : "addChatComponentMessage";
+            String methodName = VersionProxyMain.IS_DEV ? "addChatComponentMessage" : "func_146105_b";
             _ADD_MESSAGE = EntityPlayer.class.getMethod(methodName, ITextComponent.class);
             _ADD_MESSAGE.setAccessible(true);
         } catch (Exception e) {

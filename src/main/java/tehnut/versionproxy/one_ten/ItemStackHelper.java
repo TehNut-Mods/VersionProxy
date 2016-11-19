@@ -16,15 +16,19 @@ public class ItemStackHelper implements IItemStackHelper {
 
     static {
         try {
-            String fieldName = VersionProxyMain.IS_DEV ? "field_77994_a" : "stackSize";
+            String fieldName = VersionProxyMain.IS_DEV ? "stackSize" : "field_77994_a";
             _STACK_SIZE = ItemStack.class.getDeclaredField(fieldName);
             _STACK_SIZE.setAccessible(true);
+        } catch (Exception e) {
+            throw new RuntimeException("Could not reflect the \"stackSize\" field in ItemStack.");
+        }
 
-            String methodName = VersionProxyMain.IS_DEV ? "func_77949_a" : "loadItemStackFromNBT";
+        try {
+            String methodName = VersionProxyMain.IS_DEV ? "loadItemStackFromNBT" : "func_77949_a";
             _LOAD_FROM_NBT = ItemStack.class.getMethod(methodName, NBTTagCompound.class);
             _LOAD_FROM_NBT.setAccessible(true);
         } catch (Exception e) {
-            throw new RuntimeException("Could not reflect the \"stackSize\" field in ItemStack.");
+            throw new RuntimeException("Could not reflect the \"loadItemStackFromNBT\" method in ItemStack.");
         }
     }
 
