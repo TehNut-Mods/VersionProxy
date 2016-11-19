@@ -39,7 +39,8 @@ public class BlockVersionProxy extends Block {
     }
 
     // @Override - Soft override - 1.10
-    public final void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block block) {
+    // neighborChanged
+    public final void func_189540_a(IBlockState state, World worldIn, BlockPos pos, Block block) {
         neighborChangedProxy(state, worldIn, pos, block);
     }
 
@@ -49,7 +50,8 @@ public class BlockVersionProxy extends Block {
     }
 
     // @Override - Soft override - 1.10
-    public final boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+    // onBlockActivated
+    public final boolean func_180639_a(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
         return onBlockActivatedProxy(world, pos, state, player, hand, side, hitX, hitY, hitZ);
     }
 }

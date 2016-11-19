@@ -45,7 +45,8 @@ public class ItemToolVersionProxy extends ItemTool {
     }
 
     // @Override - Soft override - 1.10
-    public final EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    // onItemUse
+    public final EnumActionResult func_180614_a(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         return onItemUseProxy(player, world, pos, hand, facing, hitX, hitY, hitZ);
     }
 
@@ -55,6 +56,7 @@ public class ItemToolVersionProxy extends ItemTool {
     }
 
     // @Override - Soft override - 1.10
+    // Forge method so no srg name needed
     public final EnumActionResult onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
         return onItemUseFirstProxy(player, world, pos, side, hitX, hitY, hitZ, hand);
     }
@@ -65,7 +67,8 @@ public class ItemToolVersionProxy extends ItemTool {
     }
 
     // @Override - Soft override - 1.10
-    public final ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+    // onItemRightClick
+    public final ActionResult<ItemStack> func_77659_a(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
         return onItemRightClickProxy(world, player, hand);
     }
 }
