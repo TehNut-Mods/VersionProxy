@@ -16,23 +16,24 @@ import java.lang.reflect.Modifier;
 import java.util.Map;
 import java.util.Set;
 
-@Mod(modid = "versionproxy", name = "VersionProxy", version = "@VERSION@", dependencies = "before:*",acceptedMinecraftVersions = "[1.9.4,1.12]")
+@Mod(modid = "versionproxy", name = "VersionProxy", version = "@VERSION@", dependencies = "before:*", acceptedMinecraftVersions = "[1.9.4,1.12]")
 public class VersionProxyMain {
 
     public static final Boolean IS_DEV = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
     public static final Logger LOGGER = LogManager.getLogger("VersionProxy");
     public static final IVersionProxy PROXY;
     private static final Map<String, String> PROXY_MAP = ImmutableMap.of(
-            "1.9.4", "tehnut.versionproxy.one_ten_two.VersionProxy1_10",
-            "1.10", "tehnut.versionproxy.one_ten_two.VersionProxy1_10",
-            "1.10.2", "tehnut.versionproxy.one_ten_two.VersionProxy1_10",
+            "1.9.4", "tehnut.versionproxy.one_ten.VersionProxy1_10",
+            "1.10", "tehnut.versionproxy.one_ten.VersionProxy1_10",
+            "1.10.2", "tehnut.versionproxy.one_ten.VersionProxy1_10",
             "1.11", "tehnut.versionproxy.one_eleven.VersionProxy1_11"
     );
 
     static {
-        String mcVersion = Loader.MC_VERSION;
-        LOGGER.info("Attempting to get version proxy for {}", mcVersion);
         try {
+            String mcVersion = Loader.instance().getMinecraftModContainer().getVersion();
+            LOGGER.info("Attempting to get version proxy for Minecraft {}", mcVersion);
+
             if (!PROXY_MAP.containsKey(mcVersion))
                 throw new RuntimeException(mcVersion + " is not a valid Minecraft version for this version of VersionProxy");
 
@@ -40,6 +41,7 @@ public class VersionProxyMain {
             PROXY = (IVersionProxy) proxyClass.newInstance();
             LOGGER.info("Created version proxy for {}", mcVersion);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException("Could not find a valid Cross-Version proxy.");
         }
 
@@ -57,7 +59,7 @@ public class VersionProxyMain {
                     EnumHelper.setFailsafeFieldValue(proxyField, null, PROXY);
                     LOGGER.info("Injected version proxy at {}", fieldLocation);
                 } else {
-                    throw new RuntimeException("Cannot set IVersionProxy value for non-static field " + fieldLocation);
+                    LOGGER.error("Cannot set IVersionProxy value for non-static field {}", fieldLocation);
                 }
             }
         } catch (Exception e) {
