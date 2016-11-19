@@ -1,5 +1,6 @@
 package tehnut.versionproxy.one_eleven;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import tehnut.versionproxy.iface.IItemStackHelper;
@@ -46,5 +47,15 @@ public class ItemStackHelper implements IItemStackHelper {
         assert stack != null;
         stack.shrink(amount);
         return stack;
+    }
+
+    @Override
+    public CreativeTabs createTab(String label, final ItemStack displayStack) {
+        return new CreativeTabs(label) {
+            @Override
+            public ItemStack getTabIconItem() {
+                return displayStack;
+            }
+        };
     }
 }

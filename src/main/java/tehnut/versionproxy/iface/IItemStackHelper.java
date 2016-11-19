@@ -1,5 +1,6 @@
 package tehnut.versionproxy.iface;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -75,4 +76,15 @@ public interface IItemStackHelper {
      * return an invalid ItemStack.
      */
     ItemStack decrStackSize(@Nullable ItemStack stack, int amount);
+
+    /**
+     * Registers a new Creative Tab.
+     *
+     *
+     *
+     * @param label
+     * @param displayStack
+     * @return
+     */
+    CreativeTabs createTab(String label, ItemStack displayStack);
 }
